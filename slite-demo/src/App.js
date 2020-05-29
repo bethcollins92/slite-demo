@@ -13,12 +13,12 @@ const MainContainer = styled.div`
   max-width: 1186px;
   height: 823px;
   margin: 48px auto;
-  background: pink;
-  border-radius: 10px 10px;
+  border-radius: 8px;
 `;
 
 const TopRow = styled.div`
   display: flex;
+  border: 2px solid;
 `;
 
 const Row = styled.div`
@@ -28,31 +28,30 @@ const Row = styled.div`
 
 const PageContent = styled.div`
   width: 75%;
-  background: blue;
 `;
 
 function App() {
   return (
     <MainContainer>
+      <TopRow>
+        <p>here is the topbar</p>
+      </TopRow>
       <Router>
-        <TopRow>
-          <p>here is the topbar</p>
-        </TopRow>
         <Row>
           <SideBar />
           <Switch>
             <PageContent>
-              <Route path="policies">
+              <Route path="/policies">
                 <Policies />
-              </Route>
-              <Route path="/favorites">
-                <Favorites />
               </Route>
               <Route path="/management">
                 <Management />
               </Route>
-              <Route path="people">
+              <Route path="/people">
                 <People />
+              </Route>
+              <Route path="/favorites">
+                <Favorites />
               </Route>
             </PageContent>
           </Switch>
