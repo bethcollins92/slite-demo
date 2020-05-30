@@ -4,39 +4,52 @@ import styled from "styled-components";
 
 const SideBarStyle = styled.div`
   width: 25%;
-  background: yellow;
   max-height: 100%;
-  border-right: 1px solid;
-  border-color: grey;
-  border-radius: 8px;
+  border-right: 2px solid #efeff1;
 `;
 
 const SideBarList = styled.li`
   list-style: none;
-  font-size: 14px;
-  padding: 4px 4px;
-  background: pink;
+  padding: 4px 4px 4px 0;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   line-height: 25px;
+  font-size: 14px;
+  color: #46474f;
+  margin-left: 8px;
+`;
+
+const NestedLink = styled(StyledLink)`
+  color: #fdfdfd;
 `;
 
 const DropDown = styled.div`
-  width: 100%;
+  width: 95%;
   line-height: 25px;
   border-radius: 4px;
   background-color: #f5f5f7;
   display: flex;
   justify-content: space-between;
+  margin: 4px;
+  align-items: center;
+  padding: 4px;
 `;
 
-const DropDownText = styled(Link)``;
+const NestedLinkDiv = styled(DropDown)`
+  background: #5168ec;
+  color: #fdfdfd;
+  margin-left: 12px;
+  width: 90%;
+`;
+
 const DropDownArrow = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-size: 24px;
+  color: grey;
 `;
 
 export default class SideBar extends Component {
@@ -64,15 +77,29 @@ export default class SideBar extends Component {
   render() {
     return (
       <SideBarStyle>
-        <DropDown onClick={() => this.handleClick()}>
-          <DropDownText>⭐Favorites</DropDownText>
-          <DropDownArrow>
+        <DropDown>
+          <StyledLink to="/favorites">
+            <span role="img" aria-label="star">
+              ⭐
+            </span>
+            Favorites
+          </StyledLink>
+          <DropDownArrow onClick={() => this.handleClick()}>
             {this.state.shown ? "\u203A" : "\u203A"}
           </DropDownArrow>
         </DropDown>
+
         {this.state.shown && (
-          <StyledLink to="/people">🏅People and Culture</StyledLink>
+          <NestedLinkDiv>
+            <NestedLink to="/favorites/people-and-culture">
+              <span role="img" aria-label="medal">
+                🏅
+              </span>
+              People and Culture
+            </NestedLink>
+          </NestedLinkDiv>
         )}
+
         {this.state.links.map((link) => {
           return (
             <SideBarList key={link.id}>
@@ -84,7 +111,3 @@ export default class SideBar extends Component {
     );
   }
 }
-
-//onlick on arrow
-//dropdown flex and space between
-//arrow pointing down and sideways

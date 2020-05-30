@@ -8,19 +8,25 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
+const BackgroundDiv = styled.div`
+  background: #b0bbff;
+  margin-top: 0px;
+  padding: 0px;
+  height: 100%
+  width: 100%;
+`;
 const MainContainer = styled.div`
   width: 95%;
   max-width: 1186px;
   height: 823px;
   margin: 48px auto;
   border-radius: 8px;
-  background-color: red;
+  background: #fdfdfd;
 `;
 
 const TopRow = styled.div`
   display: flex;
-  border-bottom: 1px solid;
-  border-color: grey;
+  border-bottom: 2px solid #efeff1;
 `;
 
 const Row = styled.div`
@@ -34,7 +40,7 @@ const PageContent = styled.div`
 
 function App() {
   return (
-    <div>
+    <BackgroundDiv>
       <MainContainer>
         <TopRow>
           <p>here is the topbar</p>
@@ -50,18 +56,18 @@ function App() {
                 <Route path="/management">
                   <Management />
                 </Route>
-                <Route path="/people">
-                  <People />
-                </Route>
-                <Route path="/favorites">
+                <Route exact path="/favorites">
                   <Favorites />
+                </Route>
+                <Route path="/favorites/people-and-culture">
+                  <People />
                 </Route>
               </PageContent>
             </Switch>
           </Row>
         </Router>
       </MainContainer>
-    </div>
+    </BackgroundDiv>
   );
 }
 
