@@ -5,9 +5,10 @@ import styled from "styled-components";
 const SideBarStyle = styled.div`
   width: 25%;
   background: yellow;
-  height: 100%;
+  max-height: 100%;
   border-right: 1px solid;
   border-color: grey;
+  border-radius: 8px;
 `;
 
 const SideBarList = styled.li`
@@ -24,11 +25,18 @@ const StyledLink = styled(Link)`
 
 const DropDown = styled.div`
   width: 100%;
-  margin: 0
-  pading-top: 10px;
+  line-height: 25px;
   border-radius: 4px;
   background-color: #f5f5f7;
+  display: flex;
+  justify-content: space-between;
+`;
 
+const DropDownText = styled(Link)``;
+const DropDownArrow = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
 
 export default class SideBar extends Component {
@@ -36,9 +44,8 @@ export default class SideBar extends Component {
     super(props);
     this.state = {
       links: [
-        { name: "🏅People and Culture", route: "/people", id: 1 },
-        { name: "📚Policies", route: "/policies", id: 2 },
-        { name: "📖Management resources", route: "/management", id: 3 },
+        { name: "📚Policies", route: "/policies", id: 1 },
+        { name: "📖Management resources", route: "/management", id: 2 },
       ],
       shown: false,
     };
@@ -57,13 +64,19 @@ export default class SideBar extends Component {
   render() {
     return (
       <SideBarStyle>
-        <DropDown onClick={() => this.handleClick()}>Favorites</DropDown>
+        <DropDown onClick={() => this.handleClick()}>
+          <DropDownText>⭐Favorites</DropDownText>
+          <DropDownArrow>
+            {this.state.shown ? "\u203A" : "\u203A"}
+          </DropDownArrow>
+        </DropDown>
+        {this.state.shown && (
+          <StyledLink to="/people">🏅People and Culture</StyledLink>
+        )}
         {this.state.links.map((link) => {
           return (
             <SideBarList key={link.id}>
-              <StyledLink className="sidebar-links" to={link.route}>
-                {link.name}
-              </StyledLink>
+              <StyledLink to={link.route}>{link.name}</StyledLink>
             </SideBarList>
           );
         })}
@@ -71,3 +84,7 @@ export default class SideBar extends Component {
     );
   }
 }
+
+//onlick on arrow
+//dropdown flex and space between
+//arrow pointing down and sideways

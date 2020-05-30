@@ -14,16 +14,18 @@ const MainContainer = styled.div`
   height: 823px;
   margin: 48px auto;
   border-radius: 8px;
+  background-color: red;
 `;
 
 const TopRow = styled.div`
   display: flex;
-  border: 2px solid;
+  border-bottom: 1px solid;
+  border-color: grey;
 `;
 
 const Row = styled.div`
   display: flex;
-  height: 100%;
+  height: 93.5%;
 `;
 
 const PageContent = styled.div`
@@ -32,32 +34,34 @@ const PageContent = styled.div`
 
 function App() {
   return (
-    <MainContainer>
-      <TopRow>
-        <p>here is the topbar</p>
-      </TopRow>
-      <Router>
-        <Row>
-          <SideBar />
-          <Switch>
-            <PageContent>
-              <Route path="/policies">
-                <Policies />
-              </Route>
-              <Route path="/management">
-                <Management />
-              </Route>
-              <Route path="/people">
-                <People />
-              </Route>
-              <Route path="/favorites">
-                <Favorites />
-              </Route>
-            </PageContent>
-          </Switch>
-        </Row>
-      </Router>
-    </MainContainer>
+    <div>
+      <MainContainer>
+        <TopRow>
+          <p>here is the topbar</p>
+        </TopRow>
+        <Router>
+          <Row>
+            <SideBar />
+            <Switch>
+              <PageContent>
+                <Route path="/policies">
+                  <Policies />
+                </Route>
+                <Route path="/management">
+                  <Management />
+                </Route>
+                <Route path="/people">
+                  <People />
+                </Route>
+                <Route path="/favorites">
+                  <Favorites />
+                </Route>
+              </PageContent>
+            </Switch>
+          </Row>
+        </Router>
+      </MainContainer>
+    </div>
   );
 }
 
