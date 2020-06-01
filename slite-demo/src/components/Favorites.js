@@ -17,7 +17,7 @@ const Title = styled.h1`
 const StyledLink = styled(Link)`
   text-decoration: none;
   line-height: 25px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: #46474f;
 
@@ -31,7 +31,11 @@ export default class Favorites extends Component {
     super(props);
     this.state = {
       links: [
-        { name: "🏅 People and culture", route: "/people-and-culture", id: 1 },
+        {
+          name: "🏅 People and culture",
+          route: "/favorites/people-and-culture",
+          id: 1,
+        },
       ],
     };
   }
