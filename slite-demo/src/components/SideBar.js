@@ -10,26 +10,21 @@ const SideBarStyle = styled.div`
 
 const SideBarList = styled.li`
   list-style: none;
-  padding: 4px 4px 4px 0;
 `;
 
 const StyledLink = styled(Link)`
+  color: ${(props) => (props.selected ? "#fdfdfd" : "#46474f")};
   text-decoration: none;
   line-height: 25px;
-  font-size: 14px;
-  color: #46474f;
-  margin-left: 8px;
+  font-size: 14px
+  font-weight: 500;
 `;
 
-const NestedLink = styled(StyledLink)`
-  color: #fdfdfd;
-`;
-
-const DropDown = styled.div`
+const HeaderDiv = styled.div`
+  background: ${(props) => (props.selected ? "#5168ec" : "#f5f5f7")};
   width: 95%;
   line-height: 25px;
   border-radius: 4px;
-  background-color: #f5f5f7;
   display: flex;
   justify-content: space-between;
   margin: 4px;
@@ -37,11 +32,23 @@ const DropDown = styled.div`
   padding: 4px;
 `;
 
-const NestedLinkDiv = styled(DropDown)`
-  background: #5168ec;
+const HeaderLink = styled(StyledLink)`
+  color: ${(props) => (props.selected ? "#fdfdfd" : "#46474f")};
+  margin-left: 4px;
+`;
+
+const NestedLinkDiv = styled(HeaderDiv)`
+  background: ${(props) => (props.selected ? "#5168ec" : "#fdfdfd")};
   color: #fdfdfd;
-  margin-left: 12px;
-  width: 90%;
+  margin-left: 24px;
+  width: 83%;
+  padding: 6px;
+`;
+
+const ListDiv = styled(HeaderDiv)`
+  background: ${(props) => (props.selected ? "#5168ec" : "#fdfdfd")};
+  padding: 6px;
+  width: 93%;
 `;
 
 const DropDownArrow = styled.button`
@@ -57,8 +64,12 @@ export default class SideBar extends Component {
     super(props);
     this.state = {
       links: [
-        { name: "📚Policies", route: "/policies", id: 1 },
-        { name: "📖Management resources", route: "/management", id: 2 },
+        { name: "📚 Policies", route: "/policies", id: 1 },
+        {
+          name: "📖 Management resources",
+          route: "/management-resources",
+          id: 2,
+        },
       ],
       shown: false,
     };
@@ -77,33 +88,53 @@ export default class SideBar extends Component {
   render() {
     return (
       <SideBarStyle>
-        <DropDown>
-          <StyledLink to="/favorites">
+        <HeaderDiv selected={this.props.currentPath === "/favorites"}>
+          <HeaderLink
+            selected={this.props.currentPath === "/favorites"}
+            to="/favorites"
+          >
             <span role="img" aria-label="star">
               ⭐
             </span>
+            <span> </span>
             Favorites
-          </StyledLink>
+          </HeaderLink>
           <DropDownArrow onClick={() => this.handleClick()}>
-            {this.state.shown ? "\u203A" : "\u203A"}
+            {this.state.shown ? "\u2304" : "\u203A"}
           </DropDownArrow>
-        </DropDown>
+        </HeaderDiv>
 
         {this.state.shown && (
-          <NestedLinkDiv>
-            <NestedLink to="/favorites/people-and-culture">
+          <NestedLinkDiv
+            selected={
+              this.props.currentPath === "/favorites/people-and-culture"
+            }
+          >
+            <StyledLink
+              selected={
+                this.props.currentPath === "/favorites/people-and-culture"
+              }
+              to="/favorites/people-and-culture"
+            >
               <span role="img" aria-label="medal">
                 🏅
               </span>
-              People and Culture
-            </NestedLink>
+              People and culture
+            </StyledLink>
           </NestedLinkDiv>
         )}
 
         {this.state.links.map((link) => {
           return (
             <SideBarList key={link.id}>
-              <StyledLink to={link.route}>{link.name}</StyledLink>
+              <ListDiv selected={this.props.currentPath === link.route}>
+                <StyledLink
+                  selected={this.props.currentPath === link.route}
+                  to={link.route}
+                >
+                  {link.name}
+                </StyledLink>
+              </ListDiv>
             </SideBarList>
           );
         })}
