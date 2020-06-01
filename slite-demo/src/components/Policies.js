@@ -29,22 +29,16 @@ const Text = styled.p`
   line-height: 26px;
 `;
 
-const NotelinkDiv = styled.div`
+const PolicyListDiv = styled.div`
   padding: 2px 4px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
 `;
 
-const NoteLink = styled.div`
-  background-color: #edf1ff;
-  border-radius: 4px;
-  width: fit-content;
-  line-height: 25px;
-  margin: 16px 0px 0px 0px;
-  padding: 4px;
-  color: #5168ec;
-  font-weight: 500;
+const PolicyList = styled.h3`
+  font-size: 18px;
+  color: #46474f;
 `;
 
 export default class Policies extends Component {
@@ -52,10 +46,15 @@ export default class Policies extends Component {
     super(props);
     this.state = {
       textBox:
-        "Here you’ll find all the important information related to our internal culture. You can read about our story, learn about our values, and get the full overview of the tools we use.",
-      noteLinks: ["Our culture", "Values", "Tips & tricks"],
+        "Here you’ll find all the information you need about our policies.",
+      policies: [
+        "🎁 Benefits",
+        "🌴 Vacation and sick leave",
+        "📜 Code of conduct",
+      ],
     };
   }
+
   render() {
     return (
       <Container>
@@ -63,11 +62,11 @@ export default class Policies extends Component {
         <TextBox>
           <Text>{this.state.textBox}</Text>
         </TextBox>
-        <NotelinkDiv>
-          {this.state.noteLinks.map((link, i) => {
-            return <NoteLink key={i}>{link}</NoteLink>;
+        <PolicyListDiv>
+          {this.state.policies.map((link, i) => {
+            return <PolicyList key={i}>{link}</PolicyList>;
           })}
-        </NotelinkDiv>
+        </PolicyListDiv>
       </Container>
     );
   }

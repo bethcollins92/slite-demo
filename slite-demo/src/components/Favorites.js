@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -13,61 +14,36 @@ const Title = styled.h1`
   color: #46474f;
 `;
 
-const TextBox = styled.div`
-  padding: 10px;
-  background-color: #edf1ff;
-  border-radius: 4px;
-  border-left: 8px solid;
-  border-color: #5168ec;
-  font-size 16px;
-  margin-bottom: 12px;
-`;
-
-const Text = styled.p`
-  color: #46474f;
-  font-size: 16px;
-  line-height: 26px;
-`;
-
-const NotelinkDiv = styled.div`
-  padding: 2px 4px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const NoteLink = styled.div`
-  background-color: #edf1ff;
-  border-radius: 4px;
-  width: fit-content;
+const StyledLink = styled(Link)`
+  text-decoration: none;
   line-height: 25px;
-  margin: 16px 0px 0px 0px;
-  padding: 4px;
-  color: #5168ec;
+  font-size: 16px;
   font-weight: 500;
+  color: #46474f;
+
+  &:hover {
+    color: gray;
+  }
 `;
 
 export default class Favorites extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      textBox:
-        "Here you’ll find all the important information related to our internal culture. You can read about our story, learn about our values, and get the full overview of the tools we use.",
-      noteLinks: ["Our culture", "Values", "Tips & tricks"],
+      links: [
+        { name: "🏅 People and culture", route: "/people-and-culture", id: 1 },
+      ],
     };
   }
   render() {
     return (
       <Container>
         <Title>Favorites</Title>
-        <TextBox>
-          <Text>{this.state.textBox}</Text>
-        </TextBox>
-        <NotelinkDiv>
-          {this.state.noteLinks.map((link, i) => {
-            return <NoteLink key={i}>{link}</NoteLink>;
+        <div>
+          {this.state.links.map((link) => {
+            return <StyledLink to={link.route}>{link.name}</StyledLink>;
           })}
-        </NotelinkDiv>
+        </div>
       </Container>
     );
   }
